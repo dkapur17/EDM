@@ -8,10 +8,9 @@ public class GhostSpawner : MonoBehaviour
 
     public GroundVisualizer groundVisualizer;
     public GameObject ghost;
+    public GameObject dartGhost;
     public float spawnThreshold = 7.3f;
-    private int numGhosts = 5;
     
-    private List<GameObject> ghosts = new List<GameObject>(0);
     private float screenHalfWidth;
     private float screenHalfHeight;
 
@@ -23,39 +22,27 @@ public class GhostSpawner : MonoBehaviour
     {
         screenHalfWidth = Camera.main.orthographicSize * Camera.main.aspect;
         screenHalfHeight = Camera.main.orthographicSize;
-
-        // for (int i = 0; i < numGhosts; i++)
-        // {
-        //     // spawn ghost
-        //     GameObject ghostClone = GameObject.Instantiate(ghost);
-        //     ghosts.Add(ghostClone);
-
-        //     // set spawning position
-        //     Vector2 ghostPos = new Vector2(screenHalfWidth, screenHalfHeight-i*screenHalfHeight/numGhosts);
-        //     ghostClone.transform.position = ghostPos;
-        //     ghostClone.transform.parent = transform;
-
-        //     GhostBehavior gb = ghostClone.GetComponent<GhostBehavior>();
-        // }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         freqSum = groundVisualizer.spectrumData.Sum();
         if(freqSum > spawnThreshold && prevSum != freqSum)
         {
-            Debug.Log(freqSum);
+            // Debug.Log(freqSum);
 
             // spawn ghost
-            GameObject ghostClone = GameObject.Instantiate(ghost);
-            ghosts.Add(ghostClone);
+            GameObject ghostClone = GameObject.Instantiate(dartGhost);
 
             // set spawning position
-            Vector2 ghostPos = new Vector2(screenHalfWidth, screenHalfHeight);
+            float x = Random.Range(-screenHalfWidth, screenHalfWidth);
+            float y = Random.Range(0, screenHalfHeight);
+            Vector2 ghostPos = new Vector2(x, y);
             ghostClone.transform.position = ghostPos;
             ghostClone.transform.parent = transform;
 
+            // get attributes of ghost
             GhostBehavior gb = ghostClone.GetComponent<GhostBehavior>();
         }
         prevSum = freqSum;

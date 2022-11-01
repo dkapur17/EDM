@@ -348,7 +348,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundVisualizer: {fileID: 2045575207}
   ghost: {fileID: 4933432347591002354, guid: 8142e3fe2b42749488c40018b0ca3618, type: 3}
-  velocity: {x: -1, y: 0}
+  dartGhost: {fileID: 3389331742847899972, guid: 6b15face4cd1c424e83d37b311929094, type: 3}
+  spawnThreshold: 5
 --- !u!4 &515040094
 Transform:
   m_ObjectHideFlags: 0
@@ -700,7 +701,7 @@ GameObject:
   - component: {fileID: 806392767}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

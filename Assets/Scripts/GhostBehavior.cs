@@ -17,7 +17,12 @@ public class GhostBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
+    {
+        PlanTrajectory();
+    }
+
+    void PlanTrajectory()
     {
         rb.velocity = new Vector2(-moveSpeed, 0.0f);
     }

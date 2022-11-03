@@ -38,7 +38,7 @@ public class DartGhost : MonoBehaviour
         rb.velocity = (playerPosition - currPos).normalized * moveSpeed;
     }
 
-    void Update() 
+    void FixedUpdate() 
     {
         // Check location. If out of bounds, destroy gameobject
         float x = transform.position.x;

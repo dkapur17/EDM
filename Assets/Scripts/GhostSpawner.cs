@@ -10,6 +10,7 @@ public class GhostSpawner : MonoBehaviour
     public GameObject ghost;
     public GameObject dartGhost;
     public GameObject wanderGhost;
+    public GameObject homingGhost;
     public float spawnThreshold = 7.3f;
     
     private float screenHalfWidth;

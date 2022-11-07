@@ -9,6 +9,7 @@ public class GhostSpawner : MonoBehaviour
     public GroundVisualizer groundVisualizer;
     public GameObject ghost;
     public GameObject dartGhost;
+    public GameObject wanderGhost;
     public float spawnThreshold = 7.3f;
     
     private float screenHalfWidth;
@@ -33,7 +34,8 @@ public class GhostSpawner : MonoBehaviour
             // Debug.Log(freqSum);
 
             // spawn ghost
-            GameObject ghostClone = GameObject.Instantiate(dartGhost);
+            // GameObject ghostClone = GameObject.Instantiate(dartGhost);
+            GameObject ghostClone = GameObject.Instantiate(wanderGhost);
 
             // set spawning position
             float x = Random.Range(-screenHalfWidth, screenHalfWidth);

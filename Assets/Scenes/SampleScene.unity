@@ -349,6 +349,7 @@ MonoBehaviour:
   groundVisualizer: {fileID: 2045575207}
   ghost: {fileID: 4933432347591002354, guid: 8142e3fe2b42749488c40018b0ca3618, type: 3}
   dartGhost: {fileID: 3389331742847899972, guid: 6b15face4cd1c424e83d37b311929094, type: 3}
+  wanderGhost: {fileID: 6065965999945083152, guid: eb08fde98b06d49d88c256e0e9ff176d, type: 3}
   spawnThreshold: 7.4
 --- !u!4 &515040094
 Transform:
@@ -768,6 +769,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 20
   extraJumps: 0
+  livesLeft: 3
   groundCheck: {fileID: 404807004}
   checkRadius: 0.1
   whatIsGround:

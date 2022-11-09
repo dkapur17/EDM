@@ -13,6 +13,8 @@ public class GroundVisualizer : MonoBehaviour
     public float tileHeightShow = 0.1f;
     public float lerpFactor = 0.5f;
 
+    public float[] spectrumData;
+
     public int updateEvery = 10;
     private int frameIndex = 0;
 
@@ -56,7 +58,7 @@ public class GroundVisualizer : MonoBehaviour
 
         if (frameIndex % updateEvery == 0)
         {
-            float[] spectrumData = new float[4 * numTiles];
+            spectrumData = new float[4 * numTiles];
             audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.Rectangular);
 
             for (int i = 0; i < 2*numTiles; i++)

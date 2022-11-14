@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class MicController : MonoBehaviour
 {
-    public GameObject micPrefab;
+    public GameObject player;
     public GameObject vizCrosshair;
-    
-    private GameObject player;
+
     private GameObject mic;
     private GameObject crosshair;
     private Vector3 direction;
@@ -28,7 +27,6 @@ public class MicController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
         mic = this.transform.GetChild(0).gameObject;
         mic.GetComponent<Renderer>().enabled = false;
         

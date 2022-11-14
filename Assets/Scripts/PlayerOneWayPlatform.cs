@@ -6,12 +6,14 @@ public class PlayerOneWayPlatform : MonoBehaviour
 {
     public float fallThroughDuration = 0.25f;
     private GameObject currentPlatform;
-    private BoxCollider2D playerCollider;
+    private CapsuleCollider2D playerCollider;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerCollider = GetComponent<BoxCollider2D>();    
+        animator = GetComponent<Animator>();
+        playerCollider = GetComponent<CapsuleCollider2D>();    
     }
 
     // Update is called once per frame
@@ -20,7 +22,10 @@ public class PlayerOneWayPlatform : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             if(currentPlatform != null)
+            {
+                animator.SetTrigger("drop");
                 StartCoroutine(DisableCollision());
+            }
         }
     }
 

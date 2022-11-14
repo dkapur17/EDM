@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     private bool facingRight = true;
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         jumpsLeft = extraJumps;
     }
 
@@ -33,15 +35,27 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (isGrounded)
-            jumpsLeft = extraJumps;
-
-        if((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && jumpsLeft > 0)
         {
+            jumpsLeft = extraJumps;
+            animator.SetBool("isJumping", false);
+        }
+        else
+            animator.SetBool("isJumping", true);
+
+        if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && jumpsLeft > 0)
+        {
+            animator.SetTrigger("takeOff");
             rb.velocity = Vector2.up * jumpForce;
             jumpsLeft--;
         }
-        else if((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && jumpsLeft == 0 && isGrounded)
+        else if((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && jumpsLeft == 0 && isGrounded)
+        {
+            animator.SetTrigger("takeOff");
             rb.velocity = Vector2.up * jumpForce;
+        }
+
+        // Animation Handling
+        animator.SetBool("isRunning", Input.GetAxisRaw("Horizontal") != 0);
         
     }
 

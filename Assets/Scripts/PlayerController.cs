@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
     public int extraJumps;
+    public int livesLeft=3;
 
     private float moveInput;
     private int jumpsLeft;
@@ -78,5 +79,16 @@ public class PlayerController : MonoBehaviour
         Vector3 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
+    }
+
+    // called when this GameObject collides with GameObject2.
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        livesLeft--;
+        if (livesLeft <= 0)
+        {
+            // redirect to main menu
+            Debug.Log("Game Ended");
+        }
     }
 }

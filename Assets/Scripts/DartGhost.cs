@@ -7,7 +7,7 @@ public class DartGhost : MonoBehaviour
 
     private Rigidbody2D rb;
     public float moveSpeed = 2f;
-    public float timeRemaining = 5f;
+    public float timeRemaining = 10f;
     public float timeBeforeStart = 1f;
 
     private float screenHalfWidth;

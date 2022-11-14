@@ -386,7 +386,8 @@ MonoBehaviour:
   dartGhost: {fileID: 3389331742847899972, guid: 6b15face4cd1c424e83d37b311929094, type: 3}
   wanderGhost: {fileID: 7972842768701487367, guid: 57b11bfb08e254101a194bdcf0111195, type: 3}
   homingGhost: {fileID: 6065965999945083152, guid: eb08fde98b06d49d88c256e0e9ff176d, type: 3}
-  spawnThreshold: 5
+  spawnThreshold: 7.3
+  ghostCoolDownPeriod: 5
 --- !u!4 &515040094
 Transform:
   m_ObjectHideFlags: 0

@@ -753,7 +753,7 @@ Transform:
   m_Children:
   - {fileID: 944346793}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &684588437
 MonoBehaviour:
@@ -1111,7 +1111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4258401065144424285, guid: f33cf2dd939be734b8667ad5c4a4a33a, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -4258401065144424285, guid: f33cf2dd939be734b8667ad5c4a4a33a, type: 3}
       propertyPath: m_LocalScale.x
@@ -2244,6 +2244,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 20
   extraJumps: 0
+  livesLeft: 3
   groundCheck: {fileID: 1119919373}
   checkRadius: 0.1
   whatIsGround:

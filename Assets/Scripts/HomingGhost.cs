@@ -7,7 +7,7 @@ public class HomingGhost : MonoBehaviour
 
     private Rigidbody2D rb;
     public float moveSpeed = 2f;
-    public float timeRemaining = 5f;
+    public float timeRemaining = 10f;
     public float timeBeforeStart = 1f;
 
     private float screenHalfWidth;
@@ -28,8 +28,8 @@ public class HomingGhost : MonoBehaviour
         followPosition = new Vector2(player.transform.position.x, player.transform.position.y);
 
         StartCoroutine(Move());
-        InvokeRepeating("PlanTrajectory", 2.0f, 0.05f);
-        // Destroy(gameObject, timeRemaining);
+        InvokeRepeating("PlanTrajectory", timeBeforeStart, 0.05f);
+        Destroy(gameObject, timeRemaining);
     }
 
     IEnumerator Move()

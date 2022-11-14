@@ -7,7 +7,7 @@ public class WanderingGhost : MonoBehaviour
 
     private Rigidbody2D rb;
     public float moveSpeed = 2f;
-    public float timeRemaining = 5f;
+    public float timeRemaining = 10f;
     public float timeBeforeStart = 1f;
 
     private float screenHalfWidth;
@@ -29,7 +29,7 @@ public class WanderingGhost : MonoBehaviour
 
 
         StartCoroutine(Move());
-        InvokeRepeating("PlanTrajectory", 2.0f, 1.0f);
+        InvokeRepeating("PlanTrajectory", timeBeforeStart, 1.0f);
         Destroy(gameObject, timeRemaining);
     }
 

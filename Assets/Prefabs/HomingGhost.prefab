@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  timeRemaining: 5
+  timeRemaining: 10
   timeBeforeStart: 1
 --- !u!50 &-5008451214769760200
 Rigidbody2D:

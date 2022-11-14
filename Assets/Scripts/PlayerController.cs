@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         if (livesLeft <= 0)
         {
             // redirect to main menu
-            Debug.Log("Game Ended");
+            // Debug.Log("Game Ended");
         }
     }
 }

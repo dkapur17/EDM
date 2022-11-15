@@ -1,0 +1,78 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WistfulWandererBehaviour : MonoBehaviour
+{
+
+    private Rigidbody2D rb;
+    public float moveSpeed = 2f;
+    public int totalTargets = 4;
+    public float lerpFactor = 0.5f;
+    public float maxSurvivalTime = 10f;
+
+    private Vector2 screenSize;
+
+    private GameObject player;
+
+    private Vector2 targetPosition;
+    private int targetsVisited = 0;
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+
+        rb = GetComponent<Rigidbody2D>();
+
+        player = GameObject.FindWithTag("Player");
+
+        targetPosition = player.transform.position;
+
+        Vector2 initVelocity = (targetPosition - new Vector2(transform.position.x, transform.position.y));
+        if (initVelocity.x < 0)
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+        Destroy(gameObject, maxSurvivalTime);
+    
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if((targetPosition - new Vector2(transform.position.x, transform.position.y)).magnitude < 0.01f)
+        {
+            targetPosition = GenerateTargetPosition();
+            targetsVisited++;
+
+            if (targetsVisited >= totalTargets)
+                Destroy(gameObject);
+        }
+
+        Vector2 velocityToTarget = targetPosition - new Vector2(transform.position.x, transform.position.y);
+        rb.velocity = Vector2.Lerp(rb.velocity, velocityToTarget, lerpFactor).normalized * moveSpeed;
+
+        SetRotation();
+
+
+    }
+
+    private Vector2 GenerateTargetPosition()
+    {
+        //float x = Random.Range(-screenSize.x / 2, screenSize.x / 2);
+        //float y = Random.Range(-screenSize.y / 2, screenSize.y / 2);
+
+        return new Vector2(transform.position.x, transform.position.y) + (Random.insideUnitCircle * 1);
+    }
+
+    private void SetRotation()
+    {
+        if (rb.velocity.x < 0)
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        else
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+    }
+}

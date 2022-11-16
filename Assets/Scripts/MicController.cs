@@ -15,6 +15,7 @@ public class MicController : MonoBehaviour
     public float micSpeed;
     public bool micInUse;
     public bool micReturning;
+    private bool ghostCaptured;
     private float eps;
 
     private float screenHalfWidth;
@@ -29,6 +30,7 @@ public class MicController : MonoBehaviour
     {
         mic = this.transform.GetChild(0).gameObject;
         mic.GetComponent<Renderer>().enabled = false;
+        mic.GetComponent<Collider2D>().enabled = false;
         
         crosshair = GameObject.Instantiate(vizCrosshair);
 
@@ -71,6 +73,7 @@ public class MicController : MonoBehaviour
                 direction = Vector3.Normalize(player.transform.position-mic.transform.position);
                 if(Vector3.Distance(mic.transform.position, player.transform.position) < eps){
                     mic.GetComponent<Renderer>().enabled = false;
+                    mic.GetComponent<Collider2D>().enabled = false;
                     micInUse = false;
                     lr.enabled = false;
                     micReturning = false;
@@ -88,8 +91,26 @@ public class MicController : MonoBehaviour
 
     void spawnMic(Vector3 start, float rotationZ){
             mic.GetComponent<Renderer>().enabled = true;
+            mic.GetComponent<Collider2D>().enabled = true;
             lr.enabled = true;
             mic.transform.position = start;
             mic.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
+            ghostCaptured = false;
     }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if(ghostCaptured)
+            return;
+        if(other.tag == "DartGhost" || other.tag == "WanderingGhost" || other.tag == "HomingGhost"){
+            Debug.Log("Ghost captured");
+            ghostCaptured = true;
+            if(!micReturning)
+                micReturning = true;
+            Destroy(other.gameObject);
+        }
+    }
+    // private void OnCollisionEnter2D(Collision2D other) {
+    //     Debug.Log("Colided");
+    //     Debug.Log(other.gameObject);    
+    // }
 }

@@ -40,26 +40,19 @@ public class DreadfulDartBehaviour : MonoBehaviour
 
     IEnumerator Shoot()
     {
-
-        //float timePassed = 0f;
-        //float currAngle = Vector2.SignedAngle(rb.transform.up, targetPosition);
-        targetPosition = player.transform.position;
-
-        //while (timePassed < timeBeforeShoot)
-        //{
-
-        //    float factor = timePassed / timeBeforeShoot;
-        //    float angle = Vector2.SignedAngle(rb.transform.up, targetPosition);
-
-        //    rb.rotation = angle;
-        //    currAngle = angle;
-        //    timePassed += Time.deltaTime;
-
-        //    yield return null;
-        //}
-        yield return new WaitForSecondsRealtime(timeBeforeShoot);
-        Vector2 currPos = new Vector2(transform.position.x, transform.position.y);
-        rb.velocity = (targetPosition - currPos).normalized * moveSpeed;
+        float timePassed = 0f;
+        Vector2 targetVec;
+        while (timePassed < timeBeforeShoot)
+        {
+            targetVec = player.transform.position - transform.position;
+            float angleToCover = Vector2.SignedAngle(transform.up, targetVec);
+            float steps = (timeBeforeShoot - timePassed) / Time.deltaTime;
+            rb.rotation += angleToCover/steps;
+            timePassed += Time.deltaTime;
+            yield return null;
+        }
+        targetVec = player.transform.position - transform.position;
+        rb.velocity = targetVec.normalized * moveSpeed;
         Destroy(gameObject, timeRemaining);
     }
 
@@ -72,7 +65,6 @@ public class DreadfulDartBehaviour : MonoBehaviour
             {
                 hasShot = true;
                 rb.velocity = Vector2.zero;
-                // Start coroutine here
                 StartCoroutine(Shoot());
             }
             else

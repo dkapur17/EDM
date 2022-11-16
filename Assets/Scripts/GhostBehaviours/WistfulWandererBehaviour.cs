@@ -61,9 +61,6 @@ public class WistfulWandererBehaviour : MonoBehaviour
 
     private Vector2 GenerateTargetPosition()
     {
-        //float x = Random.Range(-screenSize.x / 2, screenSize.x / 2);
-        //float y = Random.Range(-screenSize.y / 2, screenSize.y / 2);
-
         return new Vector2(transform.position.x, transform.position.y) + (Random.insideUnitCircle * 1);
     }
 

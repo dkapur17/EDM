@@ -399,10 +399,7 @@ MonoBehaviour:
   spawnThreshold: 7.3
   maxSpectralSum: 10
   ghosts:
-  - {fileID: 8633294084969834583, guid: bae0868b8b49bde4c9f69eae2b2df27f, type: 3}
-  - {fileID: 2538368275147752060, guid: d644212f2f72cc24fb9000ee216cb0be, type: 3}
-  - {fileID: 1863130439024896060, guid: ba9b99bd7d5486b4da19bf8dc621c277, type: 3}
-  - {fileID: 1863130439024896060, guid: ba9b99bd7d5486b4da19bf8dc621c277, type: 3}
+  - {fileID: 7172398654167373383, guid: 8d9a9fe2d184fe447ab292ee4d0e9d09, type: 3}
   currentLevelAudio: 0
   waveSize: {x: 1, y: 6}
   waveDelay: {x: 4, y: 6}

@@ -16,7 +16,7 @@ public class GhostManager : MonoBehaviour
     public GroundVisualizer groundVisualizer;
     public float spawnThreshold = 7.3f;
     public float maxSpectralSum = 10f;
-    public List<GameObject> ghosts;
+    public List<GameObject> ghostTypes;
     public AudioClips currentLevelAudio;
 
 
@@ -30,6 +30,9 @@ public class GhostManager : MonoBehaviour
 
     private float timeToNextWave;
     private float maxSum;
+    private bool spawnable=true;
+
+    private GameObject[] ghosts;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +55,7 @@ public class GhostManager : MonoBehaviour
     {
         timeToNextWave -= Time.fixedDeltaTime;
 
-        if(timeToNextWave <= 0)
+        if(spawnable && timeToNextWave <= 0)
         {
             float currSum = groundVisualizer.spectrumData.Select(x => Mathf.Abs(x)).Sum();
 
@@ -60,7 +63,7 @@ public class GhostManager : MonoBehaviour
 
             for(int i = 0; i < numGhosts; i++)
             {
-                GameObject ghostType = ghosts[Random.Range(0, ghosts.Count)];
+                GameObject ghostType = ghostTypes[Random.Range(0, ghostTypes.Count)];
                 GameObject ghost = GameObject.Instantiate(ghostType, transform);
                 ghost.transform.position = GenerateSpawnPoint();
             }
@@ -87,5 +90,14 @@ public class GhostManager : MonoBehaviour
         }
 
         return spawnSite; 
+    }
+
+    public void setSpawnable(bool newSpawnable) {
+        if(!newSpawnable){
+            ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+            foreach(GameObject ghost in ghosts)
+                Destroy(ghost);
+        }
+        spawnable = newSpawnable;
     }
 }

@@ -398,7 +398,7 @@ MonoBehaviour:
   groundVisualizer: {fileID: 2045575207}
   spawnThreshold: 7.3
   maxSpectralSum: 10
-  ghosts:
+  ghostTypes:
   - {fileID: 7172398654167373383, guid: 8d9a9fe2d184fe447ab292ee4d0e9d09, type: 3}
   - {fileID: 7172398654167373383, guid: 8d9a9fe2d184fe447ab292ee4d0e9d09, type: 3}
   - {fileID: 4784335619845365927, guid: ddbd1f1e54d734544aabd2d9416caf3e, type: 3}
@@ -608,8 +608,8 @@ GameObject:
   m_Component:
   - component: {fileID: 624179566}
   - component: {fileID: 624179568}
-  - component: {fileID: 624179567}
   - component: {fileID: 624179569}
+  - component: {fileID: 624179567}
   m_Layer: 6
   m_Name: Platform
   m_TagString: Platform
@@ -773,7 +773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1be034ff9f6feb4eb3db1f924a0e919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 12772628}
+  player: {fileID: 1237319351}
+  spawnFrom: {fileID: 12772628}
   vizCrosshair: {fileID: 6907145003628465478, guid: 687d80462b3f81b4b83abb834e93a27d, type: 3}
   micSpeed: 50
   micInUse: 0
@@ -1630,11 +1631,15 @@ MonoBehaviour:
   jumpForce: 20
   extraJumps: 0
   livesLeft: 3
+  headphoneCharge: 8
+  maxCharge: 8
+  timePerCharge: 0.25
   groundCheck: {fileID: 404807004}
   checkRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 192
+  ghostManager: {fileID: 0}
 --- !u!4 &806392766
 Transform:
   m_ObjectHideFlags: 0
@@ -2148,8 +2153,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1169086243}
   - component: {fileID: 1169086245}
-  - component: {fileID: 1169086244}
   - component: {fileID: 1169086246}
+  - component: {fileID: 1169086244}
   m_Layer: 6
   m_Name: Platform
   m_TagString: Platform
@@ -2306,11 +2311,15 @@ MonoBehaviour:
   jumpForce: 20
   extraJumps: 0
   livesLeft: 3
+  headphoneCharge: 0
+  maxCharge: 8
+  timePerCharge: 0.25
   groundCheck: {fileID: 1119919373}
   checkRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 192
+  ghostManager: {fileID: 515040092}
 --- !u!50 &1237319355
 Rigidbody2D:
   serializedVersion: 4

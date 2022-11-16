@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,19 +9,27 @@ public class PlayerController : MonoBehaviour
     public int extraJumps;
     public int livesLeft=3;
 
+    public int headphoneCharge=0;
+    public int maxCharge=8;
+    public float timePerCharge=0.25f;
+
     private float moveInput;
     private int jumpsLeft;
 
 
     private Rigidbody2D rb;
     private Animator animator;
+    private AudioSource audioSource;
 
     private bool facingRight = true;
+    private bool headphoneActive=false;
 
     private bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
+
+    public GameObject ghostManager;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +37,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         jumpsLeft = extraJumps;
+
+        audioSource = GameObject.Find("Ground").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -58,6 +67,13 @@ public class PlayerController : MonoBehaviour
         // Animation Handling
         animator.SetBool("isRunning", Input.GetAxisRaw("Horizontal") != 0);
         
+        // Headphone Handling
+        if(Input.GetMouseButtonDown(1)) {
+            if(!headphoneActive && headphoneCharge != 0){
+                headphoneActive = true;
+                StartCoroutine(UseHeadphones());
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -90,5 +106,30 @@ public class PlayerController : MonoBehaviour
             // redirect to main menu
             // Debug.Log("Game Ended");
         }
+    }
+
+    private IEnumerator UseHeadphones() {
+        
+        while (audioSource.volume > 0){
+            audioSource.volume -= 2 * (Time.deltaTime);
+            yield return null;
+        }
+        audioSource.mute = true;
+        ghostManager.GetComponent<GhostManager>().setSpawnable(false);
+        yield return new WaitForSecondsRealtime(timePerCharge * headphoneCharge);
+        audioSource.mute = false;
+        headphoneCharge = 0;
+        headphoneActive = false;
+        ghostManager.GetComponent<GhostManager>().setSpawnable(true);
+        while (audioSource.volume < 1.0f){
+            audioSource.volume += 2 * (Time.deltaTime); 
+            yield return null;
+        }
+        audioSource.volume = 1.0f;
+    }
+
+    public void ChargeHeadphones() {
+        headphoneCharge = Mathf.Min(maxCharge, headphoneCharge+1);
+        Debug.Log("Charged headphones" + headphoneCharge.ToString());
     }
 }

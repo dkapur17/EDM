@@ -6,6 +6,7 @@ using UnityEngine;
 public class MicController : MonoBehaviour
 {
     public GameObject player;
+    public GameObject spawnFrom;
     public GameObject vizCrosshair;
 
     private GameObject mic;
@@ -57,8 +58,8 @@ public class MicController : MonoBehaviour
         // Microphone control logic
         if(Input.GetKeyDown(KeyCode.Mouse0) && !micInUse) {
             micInUse = true;
-            Vector3 spawnPos = player.transform.position;
-            direction = Vector3.Normalize(crosshair.transform.position - player.transform.position);
+            Vector3 spawnPos = spawnFrom.transform.position;
+            direction = Vector3.Normalize(crosshair.transform.position - spawnFrom.transform.position);
             float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             spawnMic(spawnPos, rotationZ);
         }
@@ -70,8 +71,8 @@ public class MicController : MonoBehaviour
             }
 
             if(micReturning){
-                direction = Vector3.Normalize(player.transform.position-mic.transform.position);
-                if(Vector3.Distance(mic.transform.position, player.transform.position) < eps){
+                direction = Vector3.Normalize(spawnFrom.transform.position-mic.transform.position);
+                if(Vector3.Distance(mic.transform.position, spawnFrom.transform.position) < eps){
                     mic.GetComponent<Renderer>().enabled = false;
                     mic.GetComponent<Collider2D>().enabled = false;
                     micInUse = false;
@@ -83,7 +84,7 @@ public class MicController : MonoBehaviour
             Vector3 newPos = mic.transform.position + Time.deltaTime * micSpeed * direction;
             mic.transform.position = newPos;
 
-            lr.SetPosition(0, player.transform.position);
+            lr.SetPosition(0, spawnFrom.transform.position);
             lr.SetPosition(1, newPos);
 
         }
@@ -103,6 +104,7 @@ public class MicController : MonoBehaviour
             return;
         if(other.tag == "Ghost"){
             Debug.Log("Ghost captured");
+            player.GetComponent<PlayerController>().ChargeHeadphones();
             ghostCaptured = true;
             if(!micReturning)
                 micReturning = true;

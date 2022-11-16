@@ -101,7 +101,7 @@ public class MicController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(ghostCaptured)
             return;
-        if(other.tag == "DartGhost" || other.tag == "WanderingGhost" || other.tag == "HomingGhost"){
+        if(other.tag == "Ghost"){
             Debug.Log("Ghost captured");
             ghostCaptured = true;
             if(!micReturning)

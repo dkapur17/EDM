@@ -400,6 +400,9 @@ MonoBehaviour:
   maxSpectralSum: 10
   ghosts:
   - {fileID: 7172398654167373383, guid: 8d9a9fe2d184fe447ab292ee4d0e9d09, type: 3}
+  - {fileID: 7172398654167373383, guid: 8d9a9fe2d184fe447ab292ee4d0e9d09, type: 3}
+  - {fileID: 4784335619845365927, guid: ddbd1f1e54d734544aabd2d9416caf3e, type: 3}
+  - {fileID: 5584858651342474288, guid: ff013c4d32439c2499a2bdb6fde4ad36, type: 3}
   currentLevelAudio: 0
   waveSize: {x: 1, y: 6}
   waveDelay: {x: 4, y: 6}
@@ -1933,7 +1936,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.24
 --- !u!114 &944346797
 MonoBehaviour:
   m_ObjectHideFlags: 0

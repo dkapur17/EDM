@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1065880311928037541}
   - component: {fileID: 4089425315769887006}
   - component: {fileID: 7973423088831710699}
+  - component: {fileID: 5637134748519431536}
   m_Layer: 0
   m_Name: Torso
   m_TagString: Untagged
@@ -104,6 +105,19 @@ MonoBehaviour:
     m_Extent: {x: 2.6244903, y: 3.2491863, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &5637134748519431536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246976442556811661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8693fbffcfa1984d8737e23c4ee660f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.5
 --- !u!1 &405471444465999247
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +129,7 @@ GameObject:
   - component: {fileID: 5248888154246470345}
   - component: {fileID: 388482239388761637}
   - component: {fileID: 1127178009552641575}
+  - component: {fileID: 1419293250632599399}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -207,6 +222,19 @@ MonoBehaviour:
     m_Extent: {x: 2.6375957, y: 2.6280403, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &1419293250632599399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405471444465999247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8693fbffcfa1984d8737e23c4ee660f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.5
 --- !u!1 &1706552447627204687
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +367,7 @@ GameObject:
   - component: {fileID: 324416243648585597}
   - component: {fileID: 3391913442141154236}
   - component: {fileID: 1791806037137681143}
+  - component: {fileID: 2694886523202835657}
   m_Layer: 0
   m_Name: LeftArm
   m_TagString: Untagged
@@ -431,6 +460,19 @@ MonoBehaviour:
     m_Extent: {x: 1.1046897, y: 1.4262598, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &2694886523202835657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773188479453446115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8693fbffcfa1984d8737e23c4ee660f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.5
 --- !u!1 &7172398654167373383
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +485,8 @@ GameObject:
   - component: {fileID: 7696098107383266480}
   - component: {fileID: 1000297201984044754}
   - component: {fileID: 8648159724608523263}
+  - component: {fileID: 5372166252510382052}
+  - component: {fileID: 149649057883409533}
   m_Layer: 0
   m_Name: DreadfulDart
   m_TagString: Ghost
@@ -523,6 +567,38 @@ MonoBehaviour:
   timeBeforeShoot: 1
   timeRemaining: 5
   onScreenPadding: 0.6
+--- !u!95 &5372166252510382052
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172398654167373383}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 132a083a432347847b285544a56cf864, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &149649057883409533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172398654167373383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8693fbffcfa1984d8737e23c4ee660f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.5
 --- !u!1 &7544098142450563627
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +610,7 @@ GameObject:
   - component: {fileID: 8458038751993569103}
   - component: {fileID: 8419047182879424933}
   - component: {fileID: 1764080376817705861}
+  - component: {fileID: 2003075102101862823}
   m_Layer: 0
   m_Name: RightArm
   m_TagString: Untagged
@@ -627,6 +704,19 @@ MonoBehaviour:
     m_Extent: {x: 0.848325, y: 2.08, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &2003075102101862823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7544098142450563627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8693fbffcfa1984d8737e23c4ee660f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.5
 --- !u!1 &8932902183838117965
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +728,7 @@ GameObject:
   - component: {fileID: 72693547100448281}
   - component: {fileID: 9187403648189587726}
   - component: {fileID: 630622706387331423}
+  - component: {fileID: 1671693187733130610}
   m_Layer: 0
   m_Name: Staff
   m_TagString: Untagged
@@ -730,6 +821,19 @@ MonoBehaviour:
     m_Extent: {x: 2.8949997, y: 5.827714, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!114 &1671693187733130610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932902183838117965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8693fbffcfa1984d8737e23c4ee660f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.5
 --- !u!1 &9074928608862162932
 GameObject:
   m_ObjectHideFlags: 0

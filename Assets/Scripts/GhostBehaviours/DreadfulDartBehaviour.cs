@@ -17,7 +17,6 @@ public class DreadfulDartBehaviour : MonoBehaviour
     private bool hasShot = false;
 
     private Vector2 targetPosition;
-    private bool flippedX = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +31,7 @@ public class DreadfulDartBehaviour : MonoBehaviour
 
         Vector2 initVelocity = (targetPosition - new Vector2(transform.position.x, transform.position.y));
         if (initVelocity.x < 0)
-        {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            flippedX = true;
-        }
     }
 
     IEnumerator Shoot()

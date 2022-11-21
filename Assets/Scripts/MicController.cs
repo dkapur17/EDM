@@ -6,7 +6,7 @@ using UnityEngine;
 public class MicController : MonoBehaviour
 {
     public GameObject player;
-    public GameObject spawnFrom;
+    public Transform spawnFrom;
     public GameObject vizCrosshair;
 
     private GameObject mic;
@@ -14,26 +14,22 @@ public class MicController : MonoBehaviour
     private Vector3 direction;
     
     public float micSpeed;
-    public bool micInUse;
-    public bool micReturning;
+    private bool micInUse;
+    private bool micReturning;
     private bool ghostCaptured;
     private float eps;
 
     private float screenHalfWidth;
     private float screenHalfHeight;
 
-    private LineRenderer lr;
-    private Transform[] points;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        mic = this.transform.GetChild(0).gameObject;
-        mic.GetComponent<Renderer>().enabled = false;
-        mic.GetComponent<Collider2D>().enabled = false;
+        mic = transform.GetChild(0).gameObject;
+        mic.SetActive(false);
         
-        crosshair = GameObject.Instantiate(vizCrosshair);
+        crosshair = Instantiate(vizCrosshair);
 
         screenHalfWidth = Camera.main.orthographicSize * Camera.main.aspect;
         screenHalfHeight = Camera.main.orthographicSize;
@@ -43,8 +39,6 @@ public class MicController : MonoBehaviour
         micReturning = false;
         eps = 0.1f;
 
-        lr = GetComponent<LineRenderer>();
-        lr.positionCount = 2;
         Cursor.visible = false;
     }
 
@@ -58,8 +52,8 @@ public class MicController : MonoBehaviour
         // Microphone control logic
         if(Input.GetKeyDown(KeyCode.Mouse0) && !micInUse) {
             micInUse = true;
-            Vector3 spawnPos = spawnFrom.transform.position;
-            direction = Vector3.Normalize(crosshair.transform.position - spawnFrom.transform.position);
+            Vector3 spawnPos = spawnFrom.position;
+            direction = Vector3.Normalize(crosshair.transform.position - spawnFrom.position);
             float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             spawnMic(spawnPos, rotationZ);
         }
@@ -71,12 +65,10 @@ public class MicController : MonoBehaviour
             }
 
             if(micReturning){
-                direction = Vector3.Normalize(spawnFrom.transform.position-mic.transform.position);
-                if(Vector3.Distance(mic.transform.position, spawnFrom.transform.position) < eps){
-                    mic.GetComponent<Renderer>().enabled = false;
-                    mic.GetComponent<Collider2D>().enabled = false;
+                direction = Vector3.Normalize(spawnFrom.position-mic.transform.position);
+                if(Vector3.Distance(mic.transform.position, spawnFrom.position) < eps){
+                    mic.SetActive(false);
                     micInUse = false;
-                    lr.enabled = false;
                     micReturning = false;
                 }
             }
@@ -84,19 +76,17 @@ public class MicController : MonoBehaviour
             Vector3 newPos = mic.transform.position + Time.deltaTime * micSpeed * direction;
             mic.transform.position = newPos;
 
-            lr.SetPosition(0, spawnFrom.transform.position);
-            lr.SetPosition(1, newPos);
+            mic.GetComponent<LineRenderer>().SetPosition(0, spawnFrom.position);
+            mic.GetComponent<LineRenderer>().SetPosition(1, newPos);
 
         }
     }
 
     void spawnMic(Vector3 start, float rotationZ){
-            mic.GetComponent<Renderer>().enabled = true;
-            mic.GetComponent<Collider2D>().enabled = true;
-            lr.enabled = true;
-            mic.transform.position = start;
-            mic.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
-            ghostCaptured = false;
+        mic.SetActive(true);
+        mic.transform.position = start;
+        mic.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
+        ghostCaptured = false;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -111,8 +101,4 @@ public class MicController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-    // private void OnCollisionEnter2D(Collision2D other) {
-    //     Debug.Log("Colided");
-    //     Debug.Log(other.gameObject);    
-    // }
 }

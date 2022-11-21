@@ -8,8 +8,7 @@ public class GhostManager : MonoBehaviour
 
     public enum AudioClips
     {
-        Narco,
-        SWLoFi
+        Narco
     };
 
 
@@ -95,8 +94,9 @@ public class GhostManager : MonoBehaviour
     public void setSpawnable(bool newSpawnable) {
         if(!newSpawnable){
             ghosts = GameObject.FindGameObjectsWithTag("Ghost");
-            foreach(GameObject ghost in ghosts)
-                Destroy(ghost);
+            foreach (GameObject ghost in ghosts)
+                ghost.GetComponent<GhostFade>().FadeOut();
+             
         }
         spawnable = newSpawnable;
     }

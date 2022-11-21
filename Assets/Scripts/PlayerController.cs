@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     public float moveSpeed;
     public float jumpForce;
     public int extraJumps;
-    public int livesLeft=3;
 
+    [Header("Headphones")]
     public int headphoneCharge=0;
     public int maxCharge=8;
     public float timePerCharge=0.25f;
+    public float timeToFade = 1f;
+
+    [Header("Interactions")]
+    public int livesLeft = 3;
+    public float checkRadius;
+    public LayerMask whatIsGround;
+    public Transform groundCheck;
+    public GameObject ghostManager;
+
 
     private float moveInput;
     private int jumpsLeft;
-
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -25,11 +34,7 @@ public class PlayerController : MonoBehaviour
     private bool headphoneActive=false;
 
     private bool isGrounded;
-    public Transform groundCheck;
-    public float checkRadius;
-    public LayerMask whatIsGround;
 
-    public GameObject ghostManager;
 
     // Start is called before the first frame update
     void Start()
@@ -109,23 +114,41 @@ public class PlayerController : MonoBehaviour
     }
 
     private IEnumerator UseHeadphones() {
-        
-        while (audioSource.volume > 0){
-            audioSource.volume -= 2 * (Time.deltaTime);
-            yield return null;
-        }
-        audioSource.mute = true;
+
+
+        // Disable Ghost Spawning
         ghostManager.GetComponent<GhostManager>().setSpawnable(false);
+
+        // Mute
+        float timeElapsed = 0f;
+        while(timeElapsed < timeToFade)
+        {
+            audioSource.volume -= 0.1f;
+            timeElapsed += timeToFade / 10;
+            yield return new WaitForSecondsRealtime(timeToFade / 10);
+        }
+
+        audioSource.volume = 0f;
+        audioSource.mute = true;
+
+        // Wait for charge to run out
         yield return new WaitForSecondsRealtime(timePerCharge * headphoneCharge);
-        audioSource.mute = false;
         headphoneCharge = 0;
         headphoneActive = false;
-        ghostManager.GetComponent<GhostManager>().setSpawnable(true);
-        while (audioSource.volume < 1.0f){
-            audioSource.volume += 2 * (Time.deltaTime); 
-            yield return null;
+
+        // Unmute
+        timeElapsed = 0f;
+        while (timeElapsed < timeToFade){
+            audioSource.volume += 0.1f;
+            timeElapsed += timeToFade / 10;
+            yield return new WaitForSecondsRealtime(timeToFade / 10);
         }
         audioSource.volume = 1.0f;
+        audioSource.mute = false;
+
+        // Enable Ghost Spawning
+        ghostManager.GetComponent<GhostManager>().setSpawnable(true);
+
     }
 
     public void ChargeHeadphones() {

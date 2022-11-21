@@ -15,6 +15,15 @@ public class PlayerController : MonoBehaviour
     public float timePerCharge=0.25f;
     public float timeToFade = 1f;
 
+    [Header("Sprite Switching")]
+    public Sprite headWithHeadphones;
+    public Sprite headWithoutHeadphones;
+    public Sprite torsoWithHeadphones;
+    public Sprite torsoWithoutHeadphones;
+
+    public SpriteRenderer headSpriteRenderer;
+    public SpriteRenderer torsoSpriteRenderer;
+
     [Header("Interactions")]
     public int livesLeft = 3;
     public float checkRadius;
@@ -44,6 +53,9 @@ public class PlayerController : MonoBehaviour
         jumpsLeft = extraJumps;
 
         audioSource = GameObject.Find("Ground").GetComponent<AudioSource>();
+
+        headSpriteRenderer.sprite = headWithoutHeadphones;
+        torsoSpriteRenderer.sprite = torsoWithHeadphones;
     }
 
     // Update is called once per frame
@@ -115,6 +127,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator UseHeadphones() {
 
+        // Sprite Updates
+        headSpriteRenderer.sprite = headWithHeadphones;
+        torsoSpriteRenderer.sprite = torsoWithoutHeadphones;
+        animator.SetTrigger("putOnHeadphones");
 
         // Disable Ghost Spawning
         ghostManager.GetComponent<GhostManager>().setSpawnable(false);
@@ -135,6 +151,11 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(timePerCharge * headphoneCharge);
         headphoneCharge = 0;
         headphoneActive = false;
+
+        // Sprite Updates
+        headSpriteRenderer.sprite = headWithoutHeadphones;
+        torsoSpriteRenderer.sprite = torsoWithHeadphones;
+        animator.SetTrigger("takeOffHeadphones");
 
         // Unmute
         timeElapsed = 0f;

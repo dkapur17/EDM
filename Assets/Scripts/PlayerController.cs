@@ -117,7 +117,11 @@ public class PlayerController : MonoBehaviour
     // called when this GameObject collides with GameObject2.
     void OnTriggerEnter2D(Collider2D col)
     {
+        if(col.tag != "Ghost")
+            return;
+        Destroy(col.gameObject);
         livesLeft--;
+        Debug.Log("Took a hit" + livesLeft.ToString());
         if (livesLeft <= 0)
         {
             // redirect to main menu

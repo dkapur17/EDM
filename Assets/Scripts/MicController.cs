@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,8 +73,12 @@ public class MicController : MonoBehaviour
             }
 
             Vector3 newPos = mic.transform.position + Time.deltaTime * micSpeed * direction;
+            Vector3 newDirection = Vector3.Normalize(newPos - spawnFrom.position);
+            float rotationZ = Mathf.Atan2(newDirection.y, newDirection.x) * Mathf.Rad2Deg;
+            
             mic.transform.position = newPos;
-
+            mic.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
+            
             mic.GetComponent<LineRenderer>().SetPosition(0, spawnFrom.position);
             mic.GetComponent<LineRenderer>().SetPosition(1, newPos);
 

@@ -125,7 +125,10 @@ public class PlayerController : MonoBehaviour
     {
         if(col.tag != "Ghost")
             return;
-        Destroy(col.gameObject);
+        animator.SetTrigger("damage");
+        col.gameObject.GetComponent<GhostFade>().DisableMovement();
+        col.gameObject.GetComponent<GhostFade>().FadeOut();
+        // Destroy(col.gameObject);
         livesLeft--;
         healthbar.SetValue(livesLeft);
         if (livesLeft <= 0)

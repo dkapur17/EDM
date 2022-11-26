@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationDuration: 0.5
+  master: {fileID: 8416353576487640859}
 --- !u!1 &7764616933438355777
 GameObject:
   m_ObjectHideFlags: 0

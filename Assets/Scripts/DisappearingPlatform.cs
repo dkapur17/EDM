@@ -42,9 +42,7 @@ public class DisappearingPlatform : MonoBehaviour
         gameObject.GetComponent<Renderer>().enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
-        foreach (Transform child in transform)
-            child.gameObject.SetActive(false);
-
+        DisableLights();
     }
 
     private void Reappear()
@@ -52,6 +50,17 @@ public class DisappearingPlatform : MonoBehaviour
         gameObject.GetComponent<Renderer>().enabled = true;
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
 
+        EnableLights();
+    }
+
+    public void DisableLights()
+    {
+        foreach (Transform child in transform)
+            child.gameObject.SetActive(false);
+    }
+
+    public void EnableLights()
+    {
         foreach (Transform child in transform)
             child.gameObject.SetActive(true);
     }

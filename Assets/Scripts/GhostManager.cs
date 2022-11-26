@@ -8,7 +8,14 @@ public class GhostManager : MonoBehaviour
 
     public enum AudioClips
     {
-        Narco
+        Narco,
+        YouAndI,
+        ByYourSide,
+        Dioma,
+        Ego,
+        Redemption,
+        Samurai,
+        WarMachine,
     };
 
 
@@ -37,6 +44,17 @@ public class GhostManager : MonoBehaviour
     {
 
         audioMaxSum.Add(AudioClips.Narco, 106f);
+        audioMaxSum.Add(AudioClips.YouAndI, 112f);
+        audioMaxSum.Add(AudioClips.ByYourSide, 128f);
+        audioMaxSum.Add(AudioClips.Dioma, 116.0f);
+        audioMaxSum.Add(AudioClips.Ego, 112f);
+        audioMaxSum.Add(AudioClips.Redemption, 100f);
+        audioMaxSum.Add(AudioClips.Samurai, 81f);
+        audioMaxSum.Add(AudioClips.WarMachine, 107f);
+        
+        
+        
+        
        
         GameObject[] bounds =  GameObject.FindGameObjectsWithTag("Bound");
         foreach(GameObject bound in bounds)

@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public int maxCharge=8;
     public float timePerCharge=0.25f;
     public float timeToFade = 1f;
+    public Bar headphones;
 
     [Header("Sprite Switching")]
     public Sprite headWithHeadphones;
@@ -25,12 +26,12 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer torsoSpriteRenderer;
 
     [Header("Interactions")]
-    public int livesLeft = 3;
+    public int livesLeft = 5;
     public float checkRadius;
     public LayerMask whatIsGround;
     public Transform groundCheck;
     public GameObject ghostManager;
-
+    public Bar healthbar;
 
     private float moveInput;
     private int jumpsLeft;
@@ -56,6 +57,11 @@ public class PlayerController : MonoBehaviour
 
         headSpriteRenderer.sprite = headWithoutHeadphones;
         torsoSpriteRenderer.sprite = torsoWithHeadphones;
+
+        healthbar.SetMaxValue(livesLeft);
+        headphones.SetMaxValue(maxCharge);
+        headphones.SetValue(0);
+
     }
 
     // Update is called once per frame
@@ -121,7 +127,7 @@ public class PlayerController : MonoBehaviour
             return;
         Destroy(col.gameObject);
         livesLeft--;
-        Debug.Log("Took a hit" + livesLeft.ToString());
+        healthbar.SetValue(livesLeft);
         if (livesLeft <= 0)
         {
             // redirect to main menu
@@ -135,7 +141,6 @@ public class PlayerController : MonoBehaviour
         headSpriteRenderer.sprite = headWithHeadphones;
         torsoSpriteRenderer.sprite = torsoWithoutHeadphones;
         animator.SetTrigger("putOnHeadphones");
-
         // Disable Ghost Spawning
         ghostManager.GetComponent<GhostManager>().setSpawnable(false);
 
@@ -152,7 +157,11 @@ public class PlayerController : MonoBehaviour
         audioSource.mute = true;
 
         // Wait for charge to run out
-        yield return new WaitForSecondsRealtime(timePerCharge * headphoneCharge);
+        while(headphoneCharge != 0){
+            yield return new WaitForSecondsRealtime(timePerCharge);
+            headphoneCharge--;
+            headphones.SetValue(headphoneCharge);
+        }
         headphoneCharge = 0;
         headphoneActive = false;
 
@@ -178,6 +187,6 @@ public class PlayerController : MonoBehaviour
 
     public void ChargeHeadphones() {
         headphoneCharge = Mathf.Min(maxCharge, headphoneCharge+1);
-        Debug.Log("Charged headphones" + headphoneCharge.ToString());
+        headphones.SetValue(headphoneCharge);
     }
 }

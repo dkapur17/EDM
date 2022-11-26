@@ -144,6 +144,10 @@ public class PlayerController : MonoBehaviour
         // Disable Ghost Spawning
         ghostManager.GetComponent<GhostManager>().setSpawnable(false);
 
+        // Disable Lights
+        foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
+            platform.GetComponent<DisappearingPlatform>().DisableLights();
+
         // Mute
         float timeElapsed = 0f;
         while(timeElapsed < timeToFade)
@@ -182,6 +186,10 @@ public class PlayerController : MonoBehaviour
 
         // Enable Ghost Spawning
         ghostManager.GetComponent<GhostManager>().setSpawnable(true);
+
+        // Enable Lights
+        foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
+            platform.GetComponent<DisappearingPlatform>().EnableLights();
 
     }
 

@@ -24,6 +24,8 @@ public class GroundVisualizer : MonoBehaviour
     
     private AudioSource audioSource;
 
+    public ProgressBar progressBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,8 @@ public class GroundVisualizer : MonoBehaviour
         float screenHalfHeight = Camera.main.orthographicSize;
         float blockWidth = (screenHalfWidth * 2) / numTiles;
         float tileWidth = blockWidth - 2 * tileGap;
+
+        progressBar.setSongLength(audioSource.clip.length);
 
         for (float x = -screenHalfWidth + blockWidth/2; x < screenHalfWidth; x+= blockWidth)
         {
@@ -90,6 +94,8 @@ public class GroundVisualizer : MonoBehaviour
 
         frameIndex++;
         frameIndex %= updateEvery;
+
+        progressBar.setDuration(audioSource.time);
     }
 
     void FileLog(float[] data)

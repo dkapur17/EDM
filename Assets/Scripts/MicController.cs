@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MicController : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class MicController : MonoBehaviour
     private float screenHalfWidth;
     private float screenHalfHeight;
 
+    private Dictionary<string, int> scores = new Dictionary<string, int>();
+
+    public Scores display;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +45,10 @@ public class MicController : MonoBehaviour
         eps = 0.1f;
 
         Cursor.visible = false;
+
+        scores.Add("GuidedGhoul", 0);
+        scores.Add("WistfulWanderer",0);
+        scores.Add("DreadfulDart",0);
     }
 
     // Update is called once per frame
@@ -96,11 +106,20 @@ public class MicController : MonoBehaviour
         if(ghostCaptured)
             return;
         if(other.tag == "Ghost"){
-            Debug.Log("Ghost captured");
+            string keyToUpdate = "None";
+            
+            foreach(KeyValuePair<string, int> kvp in scores)
+                if(other.gameObject.name.Contains(kvp.Key))
+                    keyToUpdate = kvp.Key;
+            if(keyToUpdate != "None")
+                scores[keyToUpdate] += 1;
+            display.updateScores(scores);
+
             player.GetComponent<PlayerController>().ChargeHeadphones();
             ghostCaptured = true;
             if(!micReturning)
                 micReturning = true;
+            
             Destroy(other.gameObject);
         }
     }

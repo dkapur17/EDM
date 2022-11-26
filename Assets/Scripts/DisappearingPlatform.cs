@@ -14,12 +14,6 @@ public class DisappearingPlatform : MonoBehaviour
     {
         playerOnPlatformTime = 0;
     }
-
-    private void Update()
-    {
-        Debug.Log(playerOnPlatformTime);
-    }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -46,14 +40,19 @@ public class DisappearingPlatform : MonoBehaviour
     private void Disappear()
     {
         gameObject.GetComponent<Renderer>().enabled = false;
-        gameObject.GetComponent<PlatformEffector2D>().enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+        foreach (Transform child in transform)
+            child.gameObject.SetActive(false);
+
     }
 
     private void Reappear()
     {
         gameObject.GetComponent<Renderer>().enabled = true;
-        gameObject.GetComponent<PlatformEffector2D>().enabled = true;
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
+
+        foreach (Transform child in transform)
+            child.gameObject.SetActive(true);
     }
 }

@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using System.IO;
 
@@ -25,8 +23,6 @@ public class GroundVisualizer : MonoBehaviour
     private float[] offsets;
     
     private AudioSource audioSource;
-
-    private float maxSum = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -62,37 +58,15 @@ public class GroundVisualizer : MonoBehaviour
         float screenHalfHeight = Camera.main.orthographicSize;
 
         audioSource.GetOutputData(spectrumData, 0);
-        //float currSum = 0;
-        //foreach(float x in spectrumData)
-        //    currSum += Mathf.Abs(x);
-
-        //if(maxSum < currSum)
-        //{
-        //    maxSum = currSum;
-        //    Debug.Log("New Max: " + maxSum.ToString());
-        //}
 
         if (frameIndex % updateEvery == 0)
         {
             spectrumData = new float[4*numTiles];
-            //audioSource.GetSpectrumData(spectrumData, 0, FFTWindow.Rectangular);
 
             audioSource.GetOutputData(spectrumData, 0);
 
             if(collectSpectralDataForAnalysis)
                 FileLog(spectrumData);
-
-            //for (int i = 0; i < 2 * numTiles; i++)
-            //    spectrumData[i] += spectrumData[4 * numTiles - i - 1];
-
-            //for (int i = 0; i < numTiles; i++)
-            //    spectrumData[i] += spectrumData[2 * numTiles - i - 1];
-
-            //for (int i = 0; i < numTiles / 2; i++)
-            //{
-            //    spectrumData[i] += spectrumData[numTiles - i - 1];
-            //    spectrumData[numTiles - i - 1] = spectrumData[i];
-            //}
 
             for (int i = 0; i < numTiles; i++)
             {
@@ -102,9 +76,6 @@ public class GroundVisualizer : MonoBehaviour
                 float offsetVal = minHeight + (Mathf.Abs(spectrumData[i + (int)(1.5f*numTiles)]) * (maxHeight - minHeight) * 3);
                 offsets[i] = offsetVal;
             }
-
-            //System.Random r = new System.Random();
-            //offsets = offsets.OrderBy(x => r.Next()).ToArray();
 
             if (frameIndex != 0)
                 frameIndex = 0;

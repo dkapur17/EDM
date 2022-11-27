@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: ca54f908c68d847c790c987ada1b6e84
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -17,4 +17,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelFailed.unity
     guid: 0a9cb72ec9e51284595f9d57cd09e925
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Dioma.unity
+    guid: 924b6ca41885f21429ca412844ffac8d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Ego.unity
+    guid: 9d8f7edb02c0bec42a93846e69055f10
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_YouAndI.unity
+    guid: ff6d9fda025bbb849b4336839b0c3ccb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Samurai.unity
+    guid: 4478cf7185f8b1d44bc0b2e49334fa00
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_WarMachine.unity
+    guid: c11e97137a4f63f489f40426d52df8f3
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level_Redemption.unity
+    guid: cc4c8199558b615498104c8d599924ed
   m_configObjects: {}

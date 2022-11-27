@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class GroundVisualizer : MonoBehaviour
 {
@@ -96,6 +97,12 @@ public class GroundVisualizer : MonoBehaviour
         frameIndex %= updateEvery;
 
         progressBar.setDuration(audioSource.time);
+
+        if (audioSource.time >= (audioSource.clip.length - 1f))
+        {
+            Cursor.visible = true;
+            SceneManager.LoadScene("LevelCompleted");
+        }
     }
 
     void FileLog(float[] data)

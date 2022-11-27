@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -133,8 +134,8 @@ public class PlayerController : MonoBehaviour
         healthbar.SetValue(livesLeft);
         if (livesLeft <= 0)
         {
-            // redirect to main menu
-            // Debug.Log("Game Ended");
+            Cursor.visible = true;
+            SceneManager.LoadScene("LevelFailed");
         }
     }
 

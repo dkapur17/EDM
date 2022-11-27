@@ -20,8 +20,6 @@ public class GhostManager : MonoBehaviour
 
 
     public GroundVisualizer groundVisualizer;
-    public float spawnThreshold = 7.3f;
-    public float maxSpectralSum = 10f;
     public List<GameObject> ghostTypes;
     public AudioClips currentLevelAudio;
 
@@ -51,10 +49,6 @@ public class GhostManager : MonoBehaviour
         audioMaxSum.Add(AudioClips.Redemption, 100f);
         audioMaxSum.Add(AudioClips.Samurai, 81f);
         audioMaxSum.Add(AudioClips.WarMachine, 107f);
-        
-        
-        
-        
        
         GameObject[] bounds =  GameObject.FindGameObjectsWithTag("Bound");
         foreach(GameObject bound in bounds)
